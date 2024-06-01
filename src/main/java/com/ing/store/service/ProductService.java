@@ -7,7 +7,6 @@ import com.ing.store.utils.Constants;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +28,10 @@ public class ProductService {
   public List<Product> retrieveAllProducts() {
     log.info(Constants.RETRIEVE_ALL_PRODUCTS_LOG_MESSAGE);
     return productRepository.findAll();
+  }
+
+  public Product findProductByName(String name) {
+    return productRepository.findProductByName(name).orElseThrow(() -> new ProductNotFoundException(name));
   }
 
   public Product updateProductPrice(Integer id, Double newPrice) {
