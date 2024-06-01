@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 @Slf4j
 public class ProductController {
-
   private ProductService productService;
 
   @PostMapping
