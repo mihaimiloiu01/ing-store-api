@@ -2,10 +2,8 @@ package com.ing.store.controller;
 
 import com.ing.store.entity.Product;
 import com.ing.store.service.ProductService;
-import com.ing.store.utils.Constants;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
-@Slf4j
 public class ProductController {
   private ProductService productService;
 
