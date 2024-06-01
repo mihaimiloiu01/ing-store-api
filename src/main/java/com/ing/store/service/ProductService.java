@@ -8,10 +8,12 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
 @Slf4j
+@Transactional
 public class ProductService {
   private ProductRepository productRepository;
 
@@ -40,5 +42,9 @@ public class ProductService {
         .orElseThrow(() -> new ProductNotFoundException(id));
     product.setPrice(newPrice);
     return productRepository.save(product);
+  }
+
+  public void deleteProduct(Integer id) {
+    productRepository.deleteProductById(id);
   }
 }
