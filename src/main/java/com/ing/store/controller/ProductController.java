@@ -25,25 +25,21 @@ public class ProductController {
 
   @PostMapping
   public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-    log.info(Constants.ADDING_PRODUCT_LOG_MESSAGE, product);
     return ResponseEntity.ok(productService.addProduct(product));
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Product> findProductById(@PathVariable Integer id) {
-    log.info(Constants.FINDING_PRODUCT_LOG_MESSAGE, id);
     return ResponseEntity.ok(productService.findProductById(id));
   }
 
   @GetMapping
   public ResponseEntity<List<Product>> retrieveAllProducts() {
-    log.info(Constants.RETRIEVE_ALL_PRODUCTS_LOG_MESSAGE);
     return ResponseEntity.ok(productService.retrieveAllProducts());
   }
 
   @PutMapping("/{id}/price")
   public ResponseEntity<Product> updateProductPrice(@PathVariable Integer id, @RequestParam Double price) {
-    log.info(Constants.UPDATING_PRICE_LOG_MESSAGE, id, price);
     return ResponseEntity.ok(productService.updateProductPrice(id, price));
   }
 }
