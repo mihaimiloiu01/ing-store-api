@@ -5,6 +5,7 @@ import com.ing.store.exception.ProductNotFoundException;
 import com.ing.store.service.ProductService;
 import com.ing.store.utils.Constants;
 import java.math.BigDecimal;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,13 @@ public class ProductController {
   @GetMapping("/{id}")
   public ResponseEntity<Product> findProductById(@PathVariable Long id) {
     log.info(Constants.FINDING_PRODUCT_LOG_MESSAGE, id);
-    return ResponseEntity.ok(productService.findProductById(id).orElseThrow(() -> new ProductNotFoundException(id)));
+    return ResponseEntity.ok(productService.findProductById(id));
+  }
+
+  @GetMapping
+  public ResponseEntity<List<Product>> retrieveAllProducts() {
+    log.info(Constants.RETRIEVE_ALL_PRODUCTS_LOG_MESSAGE);
+    return ResponseEntity.ok(productService.retrieveAllProducts());
   }
 
   @PutMapping("/{id}/price")
