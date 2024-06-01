@@ -1,10 +1,11 @@
 package com.ing.store.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.math.BigDecimal;
+import java.util.UUID;
 import lombok.Data;
 
 @Entity
@@ -12,9 +13,12 @@ import lombok.Data;
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private UUID id;
+  @JsonProperty
   private String name;
-  private BigDecimal price;
+  @JsonProperty
+  private Double price;
+  @JsonProperty
   private String description;
 
 }
