@@ -13,7 +13,7 @@ import lombok.Data;
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private UUID id;
+  private Integer id;
   @JsonProperty
   private String name;
   @JsonProperty
