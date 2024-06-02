@@ -1,9 +1,9 @@
-package com.ing.store.controller;
+package com.ing.store.controller.product;
 
 import static com.ing.store.utils.Constants.DELETED_PRODUCT;
 
-import com.ing.store.entity.Product;
-import com.ing.store.service.ProductService;
+import com.ing.store.entity.product.Product;
+import com.ing.store.service.product.ProductService;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
