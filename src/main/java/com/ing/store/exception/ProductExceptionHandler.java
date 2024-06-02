@@ -9,7 +9,7 @@ import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class ProductExceptionHandler {
   @ExceptionHandler(ProductNotFoundException.class)
   public ResponseEntity<?> handleProductNotFoundException(ProductNotFoundException ex, WebRequest request) {
     ErrorDetails errorDetails = new ErrorDetails(HttpStatus.NOT_FOUND, ex.getMessage(), request.getDescription(false));
