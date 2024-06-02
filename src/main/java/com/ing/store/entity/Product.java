@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.util.UUID;
 import lombok.Data;
 
 @Entity
@@ -21,6 +20,6 @@ public class Product {
   @JsonProperty
   private Double price;
   @JsonProperty
-  private String description;
+  private String currency;
 
 }
