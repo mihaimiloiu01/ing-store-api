@@ -1,12 +1,13 @@
 package com.ing.store.controller;
 
+import static com.ing.store.utils.Constants.DELETED_PRODUCT;
+
 import com.ing.store.entity.Product;
 import com.ing.store.service.ProductService;
-import com.ing.store.utils.Constants;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,32 +20,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/products")
 @AllArgsConstructor
-@Slf4j
 public class ProductController {
-
   private ProductService productService;
 
   @PostMapping
   public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-    log.info(Constants.ADDING_PRODUCT_LOG_MESSAGE, product);
     return ResponseEntity.ok(productService.addProduct(product));
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Product> findProductById(@PathVariable Integer id) {
-    log.info(Constants.FINDING_PRODUCT_LOG_MESSAGE, id);
     return ResponseEntity.ok(productService.findProductById(id));
+  }
+
+  @GetMapping("/name/{name}")
+  public ResponseEntity<Product> findProductByName(@PathVariable String name) {
+    return ResponseEntity.ok(productService.findProductByName(name));
   }
 
   @GetMapping
   public ResponseEntity<List<Product>> retrieveAllProducts() {
-    log.info(Constants.RETRIEVE_ALL_PRODUCTS_LOG_MESSAGE);
     return ResponseEntity.ok(productService.retrieveAllProducts());
   }
 
   @PutMapping("/{id}/price")
   public ResponseEntity<Product> updateProductPrice(@PathVariable Integer id, @RequestParam Double price) {
-    log.info(Constants.UPDATING_PRICE_LOG_MESSAGE, id, price);
     return ResponseEntity.ok(productService.updateProductPrice(id, price));
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
+    productService.deleteProduct(id);
+    return ResponseEntity.ok(DELETED_PRODUCT.concat(id.toString()));
   }
 }

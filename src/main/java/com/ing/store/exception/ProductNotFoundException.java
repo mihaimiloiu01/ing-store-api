@@ -9,4 +9,8 @@ public class ProductNotFoundException extends RuntimeException {
   public ProductNotFoundException(Integer id) {
     super(Constants.PRODUCT_NOT_FOUND_EXCEPTION + id);
   }
+
+  public ProductNotFoundException(String name) {
+    super(Constants.PRODUCT_NOT_FOUND_EXCEPTION + name);
+  }
 }
