@@ -26,18 +26,22 @@ public class UserService {
   private final UserMapper userMapper;
 
   public UserDTO login(AuthenticationRequest authenticationRequest) {
+    log.info("Fetching user data from the database considering the provided credentials");
     User user = userRepository.findByUsername(authenticationRequest.getUsername())
         .orElseThrow(() -> new UserNotFoundException("User does not exist!"));
-
+    log.info("User fetched successfully");
+    log.info(user.toString());
     if (passwordEncoder.matches(CharBuffer.wrap(authenticationRequest.getPassword()), user.getPassword())) {
+      log.info("Password matched. Mapping user entity to DTO");
       return userMapper.toUserDto(user);
     }
     else {
+      log.error("ERROR: Password mismatch!");
       throw new InvalidPasswordException("You introduced an incorrect password. Try again!");
     }
   }
 
-  public UserDTO register(SignupDTO newUserDto) {
+  public void register(SignupDTO newUserDto) {
     Optional<User> optionalUser = userRepository.findByUsername(newUserDto.getUsername());
 
     if (optionalUser.isPresent()) {
@@ -56,7 +60,7 @@ public class UserService {
     User newUser = userRepository.save(user);
     log.info("User registered successfully");
 
-    return userMapper.toUserDto(newUser);
+    userMapper.toUserDto(newUser);
   }
 
   public UserDTO findByUsername(String username) {
