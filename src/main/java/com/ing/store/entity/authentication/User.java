@@ -23,6 +23,7 @@ import lombok.NoArgsConstructor;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Integer id;
   @Column(name = "first_name")
   @JsonProperty
@@ -38,5 +39,6 @@ public class User {
   private String password;
 
   @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private Role role;
 }

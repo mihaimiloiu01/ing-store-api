@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class UserAuthenticationProvider {
   @Value("${jwt.secret}")
   private String secretKey;
@@ -35,6 +37,7 @@ public class UserAuthenticationProvider {
     Date validity = new Date(now.getTime() + expirationTime);
 
     Algorithm algorithm = Algorithm.HMAC256(secretKey);
+    log.info("Generating JWT token for new user DTO");
     return JWT.create()
         .withSubject(user.getUsername())
         .withIssuedAt(now)

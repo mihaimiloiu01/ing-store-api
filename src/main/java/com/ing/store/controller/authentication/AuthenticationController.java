@@ -5,6 +5,7 @@ import com.ing.store.controller.authentication.models.AuthenticationRequest;
 import com.ing.store.controller.authentication.models.AuthenticationResponse;
 import com.ing.store.dto.SignupDTO;
 import com.ing.store.dto.UserDTO;
+import com.ing.store.entity.authentication.User;
 import com.ing.store.service.authentication.UserService;
 import jakarta.validation.Valid;
 import java.net.URI;
@@ -31,9 +32,8 @@ public class AuthenticationController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<UserDTO> register(@RequestBody @Valid SignupDTO signupDTO) {
-    UserDTO createdUser = userService.register(signupDTO);
-    createdUser.setToken(userAuthenticationProvider.createToken(createdUser));
-    return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
+  public ResponseEntity<String> register(@RequestBody @Valid SignupDTO signupDTO) {
+    userService.register(signupDTO);
+    return ResponseEntity.ok("User created successfully");
   }
 }

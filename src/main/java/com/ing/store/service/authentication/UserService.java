@@ -13,11 +13,13 @@ import com.ing.store.repository.authentication.UserRepository;
 import java.nio.CharBuffer;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
@@ -39,14 +41,22 @@ public class UserService {
     Optional<User> optionalUser = userRepository.findByUsername(newUserDto.getUsername());
 
     if (optionalUser.isPresent()) {
+      log.error("ERROR: Username already in use!");
       throw new ExistingCredentialException("Username already in use!");
     }
-
+    log.info("Username available. New user will be created");
+    log.info("Mapping DTO info passed in the payload to actual user");
     User user = userMapper.signUpToUser(newUserDto);
+    log.info("Setting role as USER");
     user.setRole(Role.USER);
+    log.info("Encrypting password");
     user.setPassword(passwordEncoder.encode(CharBuffer.wrap(newUserDto.getPassword())));
 
-    return userMapper.toUserDto(userRepository.save(user));
+    log.info("Attempting to store the user in the database");
+    User newUser = userRepository.save(user);
+    log.info("User registered successfully");
+
+    return userMapper.toUserDto(newUser);
   }
 
   public UserDTO findByUsername(String username) {
