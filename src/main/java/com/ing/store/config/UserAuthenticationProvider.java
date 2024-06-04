@@ -33,17 +33,22 @@ public class UserAuthenticationProvider {
   }
 
   public String createToken(UserDTO user) {
-    Date now = new Date();
-    Date validity = new Date(now.getTime() + expirationTime);
+    try {
+      Date now = new Date();
+      Date validity = new Date(now.getTime() + Integer.valueOf(expirationTime));
 
-    Algorithm algorithm = Algorithm.HMAC256(secretKey);
-    log.info("Generating JWT token for new user DTO");
-    return JWT.create()
-        .withSubject(user.getUsername())
-        .withIssuedAt(now)
-        .withExpiresAt(validity)
-        .withClaim("ROLE_", user.getRole().name())
-        .sign(algorithm);
+      Algorithm algorithm = Algorithm.HMAC256(secretKey);
+      log.info("Generating JWT token for new user DTO");
+      return JWT.create()
+          .withSubject(user.getUsername())
+          .withIssuedAt(now)
+          .withExpiresAt(validity)
+          .withClaim("ROLE_", user.getRole().name())
+          .sign(algorithm);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   public Authentication validateToken(String token) {
