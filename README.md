@@ -49,4 +49,6 @@ Covered error codes: Bad Request, Unauthorized, Not Found, Internal Server Error
 ##### 1. Clone repository: https://github.com/mihaimiloiu01/ing-store-api.git
 ##### 2. Make sure you have all the dependencies installed and able to run: Java 17, PosgreSQL, Postman for endpoint testing
 ##### 3. Run the app
+###### 3.1 Create test user with the desired credentials 
+###### 3.2 Login the newly created user using the generated JWT Token
 
