@@ -1,4 +1,4 @@
-package com.ing.store.entity;
+package com.ing.store.entity.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;

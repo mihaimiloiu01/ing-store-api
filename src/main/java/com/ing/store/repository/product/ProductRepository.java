@@ -1,6 +1,6 @@
-package com.ing.store.repository;
+package com.ing.store.repository.product;
 
-import com.ing.store.entity.Product;
+import com.ing.store.entity.product.Product;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
