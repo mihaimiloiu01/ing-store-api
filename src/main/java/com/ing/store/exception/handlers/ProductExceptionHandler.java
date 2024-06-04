@@ -1,5 +1,7 @@
-package com.ing.store.exception;
+package com.ing.store.exception.handlers;
 
+import com.ing.store.exception.models.ErrorDetails;
+import com.ing.store.exception.models.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

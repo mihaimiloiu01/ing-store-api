@@ -1,7 +1,7 @@
 package com.ing.store.service.product;
 
 import com.ing.store.entity.product.Product;
-import com.ing.store.exception.ProductNotFoundException;
+import com.ing.store.exception.models.ProductNotFoundException;
 import com.ing.store.repository.product.ProductRepository;
 import com.ing.store.utils.Constants;
 import java.util.List;

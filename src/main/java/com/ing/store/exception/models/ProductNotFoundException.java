@@ -1,4 +1,4 @@
-package com.ing.store.exception;
+package com.ing.store.exception.models;
 
 import com.ing.store.utils.Constants;
 import org.springframework.http.HttpStatus;
